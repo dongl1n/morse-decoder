@@ -35,12 +35,31 @@ const MORSE_TABLE = {
     '---..':  '8',
     '----.':  '9',
     '-----':  '0',
+    '**********': ' '
 };
 
-function decode(expr) {
-    // write your solution here
+function findMorse(str){
+  for(key in MORSE_TABLE){
+    if(key === str) return MORSE_TABLE[key];
+  }
 }
 
-module.exports = {
-    decode
+function convertBinaryToMorse(symbol){
+  let arr = [];
+  str='';
+  for(let i = 0; i < symbol.length; i+=2) arr.push(symbol.slice(i, i + 2));
+  for(let i=0; i <arr.length; i++)
+    switch (arr[i]) {
+      case '00': break;
+      case '11': str+='-'; break;
+      case '10': str+='.'; break;
+      case '**': str+='**'; break;
+    }
+  return str;
+}
+
+function decode(expr) {
+    let str='';
+    for(let i = 0; i < expr.length; i+=10) str+=findMorse(convertBinaryToMorse(expr.slice(i, i + 10)));
+    return str;
 }
