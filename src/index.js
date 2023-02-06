@@ -63,3 +63,7 @@ function decode(expr) {
     for(let i = 0; i < expr.length; i+=10) str+=findMorse(convertBinaryToMorse(expr.slice(i, i + 10)));
     return str;
 }
+
+module.exports = {
+    decode
+}
